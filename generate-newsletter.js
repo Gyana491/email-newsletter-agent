@@ -1,9 +1,9 @@
-import dotenv from "dotenv";
 import fetch from "node-fetch";
 import { fetchAllApiData } from "./fetchApis.js";
 import apiCache from "./utils/cache.js";
-
+import dotenv from "dotenv";
 dotenv.config();
+
 const currentDate = new Date().toLocaleDateString();
 async function sendNewsletter(content) {
   const maxRetries = 3;
@@ -108,7 +108,6 @@ Your response must be FULLY FORMATTED HTML, not markdown. Follow this structure:
 2. An introduction paragraph
 3. Structured sections for different types of AI news (using appropriate HTML sectioning elements)
 4. Proper links with <a href="..."> tags
-5. A styled footer with copyright and unsubscribe link
 
 Use the following data to create the content:
 What's Trending in the Lateest AI Space, Oprganisee in Sections use like(top 3/5/10)
@@ -222,10 +221,6 @@ function generateEmailTemplate(summary, currentDate) {
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1>AI Discovery Digest</h1>
-    <p class="date">${currentDate}</p>
-  </div>
   
   <div class="content">
     <p class="intro">Dear Reader,</p>
@@ -235,10 +230,7 @@ function generateEmailTemplate(summary, currentDate) {
       ${summary}
     </div>
   </div>
-  
-  <div class="footer">
-    <p>© ${new Date().getFullYear()} AI Discovery Digest • <a href="#">Unsubscribe</a></p>
-  </div>
+
 </body>
 </html>
 `;
