@@ -9,10 +9,12 @@ A Node.js service that automatically generates and sends AI-focused newsletters 
   - GitHub Trending Developers
   - Hugging Face Research Papers
   - Hugging Face Trending Models/Datasets/Spaces
-- 📝 AI-powered content summarization using DeepSeek API
+- 📝 AI-powered content summarization using OpenRouter API with Meta's Llama-4-Maverick model
 - 📧 Automated newsletter generation with responsive HTML templates
-- 💾 Intelligent caching system for API responses
+- 💾 Intelligent caching system for API responses (10-minute TTL)
 - 🔄 Automatic retry mechanism for reliable email delivery
+- 📱 Mobile-friendly responsive email design
+- 🎨 Professional styling with modern CSS
 
 ## Prerequisites
 
@@ -30,14 +32,18 @@ npm install
 
 3. Create a `.env` file in the root directory with the following variables:
 ```env
-DEEPSEEK_API_KEY=your_deepseek_api_key
+API_KEY=your_openrouter_api_key
+PORT=3000
 ```
+
+Note: You can obtain an OpenRouter API key from https://openrouter.ai/
 
 ## Usage
 
 Start the server:
 ```bash
-npm start
+npm run dev  # for development with auto-reload
+npm start    # for production
 ```
 
 The server will start on port 3000 by default (configurable via PORT environment variable).
@@ -45,6 +51,10 @@ The server will start on port 3000 by default (configurable via PORT environment
 ### API Endpoints
 
 - `GET /send-newsletter`: Generates and sends the newsletter
+  - Aggregates content from multiple sources
+  - Generates an AI-powered summary
+  - Formats content into a responsive HTML email
+  - Sends to all subscribers
   - Returns a JSON response with the status of the newsletter generation and sending process
 
 ## Project Structure
@@ -59,15 +69,17 @@ The server will start on port 3000 by default (configurable via PORT environment
 ## Error Handling
 
 - The service includes comprehensive error handling:
-  - API request failures
-  - Content generation errors
-  - Email sending retries (up to 3 attempts)
+  - API request failures with detailed error messages
+  - Content generation retries with OpenRouter API
+  - Email sending retries (up to 3 attempts with 2-second delays)
   - Server error middleware
+  - Invalid response handling
 
 ## Caching
 
 - API responses are cached for 10 minutes to improve performance
 - Individual endpoint responses are cached separately
+- Newsletter summaries are cached to reduce API calls
 - Cache can be cleared programmatically if needed
 
 ## Contributing
