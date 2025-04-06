@@ -86,13 +86,13 @@ async function summarizeText(inputText) {
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+        Authorization: `Bearer ${process.env.API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://yourdomain.com",
+        "HTTP-Referer": "https://trendgpt-3jox.onrender.com/",
         "X-Title": "AI Discovery Agent",
       },
       body: JSON.stringify({
-        model: "meta-llama/llama-4-scout:free",
+        model: "meta-llama/llama-4-maverick:free",
         messages: [
           {
             role: "system",
@@ -143,7 +143,7 @@ ${inputText}`,
     return htmlEmail;
     
   } else {
-    console.error("❌ DeepSeek Error:", data);
+    console.error("❌ Open Router API Error:", data);
     throw new Error("Failed to generate newsletter content");
   }
 }
